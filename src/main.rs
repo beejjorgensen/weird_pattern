@@ -1,17 +1,17 @@
-use std::path::Path;
+use rand::prelude::*;
+use std::env;
 use std::fs::File;
 use std::io::BufWriter;
-use std::env;
+use std::path::Path;
 use std::process;
-use rand::prelude::*;
 
 const SIZE: usize = 100;
 
 fn init_screen(screen: &mut [i32]) {
     let mut rng = thread_rng();
 
-    for row in 1..SIZE-1 {
-        for col in 1..SIZE-1 {
+    for row in 1..SIZE - 1 {
+        for col in 1..SIZE - 1 {
             screen[row * SIZE + col] = rng.gen_range(0..=255);
         }
     }
@@ -21,8 +21,8 @@ fn run(iterations: usize, addition: i32, screen: &mut [i32]) {
     let mut rng = thread_rng();
 
     for _ in 0..iterations {
-        for row in 1..SIZE-1 {
-            for col in 1..SIZE-1 {
+        for row in 1..SIZE - 1 {
+            for col in 1..SIZE - 1 {
                 let mut total: i32 = 0;
 
                 total = total.wrapping_add(screen[(row - 1) * SIZE + (col - 1)]);
